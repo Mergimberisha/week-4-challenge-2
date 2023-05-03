@@ -1,4 +1,4 @@
-# {{ METHOD }} {{ PATH}} Route Design Recipe
+# GET /albums Route Design Recipe
 
 _Copy this design recipe template to test-drive a Sinatra route._
 
@@ -10,6 +10,9 @@ You'll need to include:
   * any query parameters (passed in the URL)
   * or body parameters (passed in the request body)
 
+  Method: GET
+  Path: /albums
+
 ## 2. Design the Response
 
 The route might return different responses, depending on the result.
@@ -20,30 +23,10 @@ Your response might return plain text, JSON, or HTML code.
 
 _Replace the below with your own design. Think of all the different possible responses your route will return._
 
-```html
-<!-- EXAMPLE -->
-<!-- Response when the post is found: 200 OK -->
-
-<html>
-  <head></head>
-  <body>
-    <h1>Post title</h1>
-    <div>Post content</div>
-  </body>
-</html>
 ```
-
-```html
-<!-- EXAMPLE -->
-<!-- Response when the post is not found: 404 Not Found -->
-
-<html>
-  <head></head>
-  <body>
-    <h1>Sorry!</h1>
-    <div>We couldn't find this post. Have a look at the homepage?</div>
-  </body>
-</html>
+Doolittle
+Surfer Rosa
+OK Computer
 ```
 
 ## 3. Write Examples
@@ -53,20 +36,25 @@ _Replace these with your own design._
 ```
 # Request:
 
-GET /posts?id=1
+GET /albums
 
 # Expected response:
 
 Response for 200 OK
 ```
-
+Doolittle
+Surfer Rosa
+Waterloo
+Super Trouper
+Bossanova
+Lover
+Folklore
+I Put a Spell on You
+Baltimore
+Here Comes the Sun
+Fodder on My Wings
+Ring Ring
 ```
-# Request:
-
-GET /posts?id=276278
-
-# Expected response:
-
 Response for 404 Not Found
 ```
 
@@ -83,7 +71,7 @@ describe Application do
 
   let(:app) { Application.new }
 
-  context "GET /" do
+  context "GET /" do  
     it 'returns 200 OK' do
       # Assuming the post with id 1 exists.
       response = get('/posts?id=1')
@@ -106,7 +94,7 @@ end
 
 Write the route and web server code to implement the route behaviour.
 
-<!-- BEGIN GENERATED SECTION DO NOT EDIT -->
+<!-- BEGIN GENERATED SECTION DO NOT EDIT --> 
 
 ---
 
