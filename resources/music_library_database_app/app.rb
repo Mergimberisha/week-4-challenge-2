@@ -22,13 +22,9 @@ class Application < Sinatra::Base
 
   get "/albums" do
     repo = AlbumRepository.new
-    albums = repo.all
+    @albums = repo.all
 
-    response = albums.map do |album|
-      album.title
-    end.join(", ")
-
-    return response
+    return erb(:albums)
   end
 
   get "/albums/:id" do

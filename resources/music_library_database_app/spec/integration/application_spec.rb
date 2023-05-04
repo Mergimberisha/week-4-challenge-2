@@ -46,13 +46,14 @@ describe Application do
   end
 
   context "GET /albums" do
-    it "should return the list of albums" do
+    it "should return the list of albums with information" do
       response = get("/albums")
 
-      expected_response = "Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring"
-
       expect(response.status).to eq(200)
-      expect(response.body).to eq(expected_response)
+      expect(response.body).to include("Title: Doolittle")
+      expect(response.body).to include("Released: 1989")
+      expect(response.body).to include("Title: Surfer Rosa")
+      expect(response.body).to include("Released: 1988")
     end
   end
 
