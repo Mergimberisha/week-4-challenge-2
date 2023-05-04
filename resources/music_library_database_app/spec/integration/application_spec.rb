@@ -24,6 +24,17 @@ describe Application do
     end
   end
 
+  context "GET /albums/:id" do
+    it " should return info about album 2" do
+      response = get("/albums/2")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<h1>Surfer Rosa</h1>")
+      expect(response.body).to include("Release year: 1988")
+      expect(response.body).to include("Artist: Pixies")
+    end
+  end
+
   def reset_artists_table
     seed_sql = File.read("spec/seeds/artists_seeds.sql")
     connection = PG.connect({ host: "127.0.0.1", dbname: "music_library_test_1" })
