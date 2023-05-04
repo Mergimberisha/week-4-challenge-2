@@ -10,6 +10,16 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
+  def reset_artists_table
+    seed_sql = File.read("spec/seeds/music_library.sql")
+    connection = PG.connect({ host: "127.0.0.1", dbname: "music_library_test_1" })
+    connection.exec(seed_sql)
+  end
+
+  before(:each) do
+    reset_artists_table
+  end
+
   context "GET /" do
     it "returns an hello page if the password is correct" do
       response = get("/", password: "abcd")
@@ -35,25 +45,15 @@ describe Application do
     end
   end
 
-  def reset_artists_table
-    seed_sql = File.read("spec/seeds/artists_seeds.sql")
-    connection = PG.connect({ host: "127.0.0.1", dbname: "music_library_test_1" })
-    connection.exec(seed_sql)
-  end
-
-  before(:each) do
-    reset_artists_table
-  end
-
   context "GET /albums" do
     it "should return the list of albums with information" do
       response = get("/albums")
 
       expect(response.status).to eq(200)
-      expect(response.body).to include("Title: Doolittle")
-      expect(response.body).to include("Released: 1989")
-      expect(response.body).to include("Title: Surfer Rosa")
-      expect(response.body).to include("Released: 1988")
+      expect(response.body).to include('<a href="albums/1">Doolittle</a>')
+      expect(response.body).to include('<a href="albums/2">Surfer Rosa</a>')
+      expect(response.body).to include('<a href="albums/3">Waterloo</a>')
+      expect(response.body).to include('<a href="albums/6">Lover</a>')
     end
   end
 
@@ -70,14 +70,22 @@ describe Application do
     end
   end
 
+  context "GET /artists/:id" do
+    it " should return info about artist 1" do
+      response = get("/artists/1")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("Name: Pixies")
+      expect(response.body).to include("Genre: Rock")
+    end
+  end
+
   context "GET /artists" do
     it "should return the list of artists" do
       response = get("/artists")
 
-      expected_response = "Pixies, ABBA, Taylor Swift, Nina Simone"
-
       expect(response.status).to eq(200)
-      expect(response.body).to eq(expected_response)
+      expect(response.body).to include('<a href="artists/2">ABBA</a>')
     end
   end
 
@@ -90,7 +98,7 @@ describe Application do
 
       response = get("/artists")
 
-      expect(response.body).to include("Pixies, ABBA, Taylor Swift, Nina Simone, Wild nothing")
+      expect(response.body).to include("Wild nothing")
     end
   end
 end
