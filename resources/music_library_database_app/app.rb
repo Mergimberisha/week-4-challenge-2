@@ -15,7 +15,7 @@ class Application < Sinatra::Base
   end
 
   get "/" do
-    @names = ["Anna", "Kim", "Josh", "David"]
+    @password = params[:password]
 
     return erb(:index)
   end

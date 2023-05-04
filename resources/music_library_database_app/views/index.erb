@@ -1,7 +1,5 @@
 <html>
 	<body>
-		<% @names.each do |name| %>
-		<p><%= name %></p>
-		<% end %>
+		<% if @password == 'abcd' %> Hello! <% else %> Access forbidden! <% end %>
 	</body>
 </html>
