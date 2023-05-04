@@ -15,6 +15,8 @@ describe Application do
       response = get("/")
 
       expect(response.body).to include ("<h1>Hello!</h1>")
+      # <img src="hello.jpg" />
+      expect(response.body).to include('<img src="hello.jpg" />')
     end
   end
 
