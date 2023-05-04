@@ -10,6 +10,14 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
+  context "GET /" do
+    it "returns the html index" do
+      response = get("/")
+
+      expect(response.body).to include ("<h1>Hello!</h1>")
+    end
+  end
+
   def reset_artists_table
     seed_sql = File.read("spec/seeds/artists_seeds.sql")
     connection = PG.connect({ host: "127.0.0.1", dbname: "music_library_test_1" })
