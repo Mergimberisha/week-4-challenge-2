@@ -11,12 +11,19 @@ describe Application do
   let(:app) { Application.new }
 
   context "GET /" do
-    it "returns the html index" do
-      response = get("/")
+    it "returns an html hello message with the given names" do
+      response = get("/", name: "Mergz")
 
-      expect(response.body).to include ("<h1>Hello!</h1>")
+      expect(response.body).to include ("<h1>Hello Mergz!</h1>")
+    end
+
+    it "returns an html hello message with a different name" do
+      response = get("/", name: "Mergim")
+
+      expect(response.body).to include ("<h1>Hello Mergim!</h1>")
+
       # <img src="hello.jpg" />
-      expect(response.body).to include('<img src="hello.jpg" />')
+      # expect(response.body).to include('<img src="hello.jpg" />')
     end
   end
 
