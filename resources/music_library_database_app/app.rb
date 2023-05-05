@@ -14,6 +14,22 @@ class Application < Sinatra::Base
     also_reload "lib/artist_repository"
   end
 
+  get "/albums/new/new" do
+    return erb(:create_album_form)
+  end
+
+  post "/albums/new" do
+    repo = AlbumRepository.new
+    @album = Album.new
+    @album.title = params[:title]
+    @album.release_year = params[:release_year]
+    @album.artist_id = params[:artist_id]
+    repo.create(@album)
+    @list = repo.all
+
+    return erb(:created_album)
+  end
+
   get "/" do
     @password = params[:password]
 

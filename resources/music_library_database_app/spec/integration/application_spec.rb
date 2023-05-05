@@ -101,4 +101,20 @@ describe Application do
       expect(response.body).to include("Wild nothing")
     end
   end
+
+  context "POST /albums/new" do
+    it "adds a new album to the database" do
+      response = post("/albums/new", title: "born to run", release_year: "1976", artist_id: "2")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<p>You successfully added: born to run</p>")
+    end
+
+    it "adds a new album to the database" do
+      response = post("/albums/new", title: "born in the USA", release_year: "1986", artist_id: "2")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<p>You successfully added: born in the USA</p>")
+    end
+  end
 end
