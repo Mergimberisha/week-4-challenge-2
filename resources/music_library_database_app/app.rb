@@ -14,7 +14,7 @@ class Application < Sinatra::Base
     also_reload "lib/artist_repository"
   end
 
-  get "/albums/new/new" do
+  get "/albums/new_album" do
     return erb(:create_album_form)
   end
 
