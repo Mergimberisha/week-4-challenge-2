@@ -30,6 +30,22 @@ class Application < Sinatra::Base
     return erb(:created_album)
   end
 
+  get "/artist/new_artist" do
+    return erb(:create_artist_form)
+  end
+
+  post "/artist/new" do
+    repo = ArtistRepository.new
+    @artist = Artist.new
+    @artist.name = params[:name]
+    @artist.genre = params[:genre]
+
+    repo.create(@artist)
+    @biography = repo.all
+
+    return erb(:created_artist)
+  end
+
   get "/" do
     @password = params[:password]
 

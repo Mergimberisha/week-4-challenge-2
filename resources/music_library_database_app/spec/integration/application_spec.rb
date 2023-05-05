@@ -117,4 +117,20 @@ describe Application do
       expect(response.body).to include("<p>You successfully added: born in the USA</p>")
     end
   end
+
+  context "POST /artist/new" do
+    it "adds a new artist to the database" do
+      response = post("/artist/new", name: "Bruce Springsteen", genre: "Rock")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<p>You successfully added: Bruce Springsteen</p>")
+    end
+
+    it "adds a new artist to the database" do
+      response = post("/artist/new", name: "Beyonce", genre: "Pop")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include("<p>You successfully added: Beyonce</p>")
+    end
+  end
 end
