@@ -1,7 +1,6 @@
-
 require "spec_helper"
 require "rack/test"
-require_relative '../../app'
+require_relative "../../app"
 
 describe Application do
   # This is so we can use rack-test helper methods.
@@ -13,25 +12,25 @@ describe Application do
 
   # setup
   before do
-    create_test_post_with_tags('Test cooking post', ['cooking'])
-    create_test_post_with_tags('Test programming post', ['programming'])
+    create_test_post_with_tags("Test cooking post", ["cooking"])
+    create_test_post_with_tags("Test programming post", ["programming"])
   end
 
-  context 'GET /' do
-    it 'shows the list of posts' do
-      response = get('/')
+  context "GET /" do
+    it "shows the list of posts" do
+      response = get("/")
 
-      expect(response.body).to include('Test programming post')
-      expect(response.body).to include('Test cooking post')
+      expect(response.body).to include("Test programming post")
+      expect(response.body).to include("Test cooking post")
     end
   end
 
-  context 'GET /tag/:tag' do
-    it 'displays the posts tagged with cooking' do
-      response = get('/tag/cooking')
+  context "GET /tag/:tag" do
+    it "displays the posts tagged with cooking" do
+      response = get("/tag/cooking")
 
-      expect(response.body).to include('Test cooking post')
-      expect(response.body).to_not include('Test programming post')
+      expect(response.body).to include("Test cooking post")
+      expect(response.body).to_not include("Test programming post")
     end
   end
 
