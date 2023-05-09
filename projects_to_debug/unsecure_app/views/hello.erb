@@ -6,7 +6,11 @@
   </head>
   <body>
     <p>
-      Hi <%= @name %>!
+      <% if @name.include?("<script>") %>
+        Try again
+      <% else %> 
+        Hi <%= @name %>!
+      <% end %>
     </p>
   </body>
 </html>
